@@ -6,6 +6,8 @@ import { GT, DanToc, QueQuan, TenK, KhoiThi, Diem, KetQua, KhuVuc } from './Data
 import { Data } from './Data';
 import { getAllStudents } from './Services';
 // import {datafake} from './data'
+var DecisionTree = require('decision-tree');
+
 export default class DuDoan extends React.Component {
   static navigationOptions = {
     drawerIcon: ({ tintcolor }) => (
@@ -15,30 +17,42 @@ export default class DuDoan extends React.Component {
   constructor() {
     super();
     this.state = {
-      DD: [],
-      // students : this.getData(),
-      // A:[[]], // lưu giá trị thuật toán
+      result: "",
+      training_data: [],
+      class_name: "result",
+      features: ["sex", "nation", "address", "area", "block", "test_score", "faculty", "education_program"],
+      // data mẫu để test. e chỉ cần bắt sự kiện thay đổi giá trị của picker và gán lại state tương ứng là đc.
+      sex: "Nam",
+      nation: "Khác",
+      address: "Vĩnh Lộc",
+      area: "KV2",
+      block: "A1",
+      test_score: 16.5,
+      faculty: "Tiểu học",
+      education_program: "Khối kiến thức giáo dục đại cương(40),Khối kiến thức giáo dục chuyên nghiệp(86)"
     }
   }
   async componentWillMount() {
-    //xây dựng thuật toán. trả về 1 giá trị A
     let students = await getAllStudents()
-    console.log(students.length)
-    this.setState({ students })
+    this.setState({ training_data: students })
   }
+
   onDudoan = () => {
-    // dùng dữ liệu ng dùng nhập vào và két quả giá trị A để xét.
-    var KQ = KetQua[Math.floor(Math.random(0, 3) * KetQua.length)];
-    this.setState(
-      {
-        DD: KQ
-      }
-    )
+    let {training_data, class_name, features} = this.state
+    var dt = new DecisionTree(training_data, class_name, features);
+    var predicted_class = dt.predict({
+      sex: this.state.sex,
+      nation: this.state.nation,
+      address: this.state.address,
+      area: this.state.area,
+      block: this.state.block,
+      test_score: this.state.test_score,
+      faculty: this.state.faculty,
+      education_program: this.state.education_program
+    });
+    this.setState({ result: predicted_class })
   }
-  // viết 1 function gọi data. 
-  // getData(){
-  //   return  datafake
-  // }
+
   render() {
     return (
       <View style={styles.container}>
@@ -125,8 +139,8 @@ export default class DuDoan extends React.Component {
           <Text style={{ borderRadius: 3, backgroundColor: 'dodgerblue', color: 'white', width: 120 }}>Kết quả dự đoán</Text>
           <Text></Text>
           <View style={{ flexDirection: 'row' }}>
-            <Text style={{ marginBottom: 10, fontSize: 15 }}>Kết quả:</Text>
-            <Text style={{ left: 30, backgroundColor: 'aqua', width: 150, textAlign: 'center', alignItems: 'center' }}>{this.state.DD}</Text>
+            <Text style={{ marginBottom: 10, fontSize: 15 }}>Kết quả dự đoán:</Text>
+            <Text style={{ left: 30, backgroundColor: 'aqua', width: 150, textAlign: 'center', alignItems: 'center' }}>{this.state.result}</Text>
           </View>
         </ScrollView>
       </View >
