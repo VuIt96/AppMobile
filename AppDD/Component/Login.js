@@ -1,14 +1,14 @@
 import React, { component } from 'react';
-import { StyleSheet, Text, View, TextInput, Button, Alert } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button, Alert,Image } from 'react-native';
 import { Header, Left, Right, Icon } from 'native-base';
 class Login extends React.Component {
-//   static navigationOptions = {
-//     title: "Login",
-//     header: null,
-//   };
-static navigationOptions = {
+  //   static navigationOptions = {
+  //     title: "Login",
+  //     header: null,
+  //   };
+  static navigationOptions = {
     drawerIcon: ({ tintcolor }) => (
-      <Icon name="analytics" style={{ fontSize: 24, color: tintcolor }} />
+      <Icon name="log-out" style={{ fontSize: 24, color: tintcolor }} />
     )
   };
   state = {
@@ -19,7 +19,7 @@ static navigationOptions = {
   };
   onLogin() {
     const { user1, password1, user, password } = this.state;
-      //Alert.alert('Tài khoản vừa đăng nhập', `user: ${user1}: ${user}và pass: ${password1}`)
+    //Alert.alert('Tài khoản vừa đăng nhập', `user: ${user1}: ${user}và pass: ${password1}`)
     if ((this.state.user === user1) && (this.state.password === password1)) {
       // chuyen trang khi nhap dung
       this.props.navigation.navigate('Trang chủ')
@@ -34,20 +34,25 @@ static navigationOptions = {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.headerText}>LOGIN</Text>
-        <TextInput style={styles.input}
-          value={this.state.user1}
-        //   keyboardType = 'email-address'
-          onChangeText={(user1) => this.setState({ user1 })}
-          placeholder='username'
-        />
-        <TextInput style={styles.input}
-          // gán giá trị vào state.password
-          value={this.state.password1}
-          onChangeText={(password1) => this.setState({ password1 })}
-          placeholder={'password'}
-          secureTextEntry={true}
-        />
+      <Image style={{width:100, height: 90, top:-30}} source={require('./img/iconhdu.jpg')}/>
+        <Text style={styles.headerText}>Đăng Nhập</Text>
+        {/* <View style={{ flexDirection: 'row' }}>
+          <Icon name="lock" /> */}
+          <TextInput style={styles.input}
+            value={this.state.user1}
+            //   keyboardType = 'email-address'
+            onChangeText={(user1) => this.setState({ user1 })}
+            placeholder='username'
+          />
+        {/* <View style={{ flexDirection: 'row', backgroundColor: 'rgba(215,125,115,0.2)' }}>
+          <Icon name="key" /> */}
+          <TextInput style={styles.input}
+            // gán giá trị vào state.password
+            value={this.state.password1}
+            onChangeText={(password1) => this.setState({ password1 })}
+            placeholder={'password'}
+            secureTextEntry={true}
+          />
         <Button style={styles.buttonText}
           title="LOGIN"
           onPress={this.onLogin.bind(this)}
@@ -67,10 +72,11 @@ const styles = StyleSheet.create({
     height: 40,
     width: 220,
     alignItems: 'center',
-    backgroundColor: 'rgba(215,125,115,0.2)',
     marginBottom: 10,
     padding: 10,
     color: 'green',
+    top: -20,
+    backgroundColor: 'rgba(215,125,115,0.2)'
   },
   button: {
     backgroundColor: '#2980b6',
@@ -86,8 +92,9 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
     margin: 10,
-    fontWeight: 'bold'
+    fontWeight: 'bold', 
+    color: 'midnightblue',
+    top: -30
   },
 });
-
 export default (Login)

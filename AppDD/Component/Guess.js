@@ -42,7 +42,7 @@ export default class DuDoan extends React.Component {
   }
   async componentWillMount() {
     let students = await getAllStudents()
-    this.setState({ training_data: students })
+    this.setState({ training_data: students})
   }
   onDudoan = () => {
     let { training_data, class_name, features } = this.state
@@ -229,7 +229,7 @@ export default class DuDoan extends React.Component {
             <View style={{ width: 250, flexDirection: 'row' }}>
               <View style={{ left: 10, width: 100 }}>
                 <Button
-                title='Dự đoán'
+                  title='Dự đoán'
                   onPress={this.onDudoan}
                 />
               </View>
@@ -281,7 +281,7 @@ const styles = StyleSheet.create({
     width: 180,
     borderRadius: 20,
     alignItems: 'center',
-    textAlign:'center'
+    textAlign: 'center'
   },
   textinputs: {
     margin: 15,
