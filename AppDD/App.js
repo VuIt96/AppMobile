@@ -31,8 +31,8 @@ const AppDrawerNavigator = createDrawerNavigator(
     "Đăng xuất": Login,
     "Trang chủ": Home,
     "Dự đoán": DuDoan,
-    "Chi tiết": ChiTiet,
     "Giới thiệu": GioiThieu,
+    " ": ChiTiet,
   },
   {
     contentComponent: customDrawerComponent,

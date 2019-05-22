@@ -1,10 +1,10 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, Image, ScrollView, TouchableOpacity } from 'react-native';
-import { Header, Left, Right, Icon } from 'native-base';
+import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity } from 'react-native';
+import { Header, Left, Right, Icon,Button } from 'native-base';
 export default class GioiThieu extends React.Component {
     static navigationOptions = {
-        drawerIcon: ({ tintcolor }) => (
-            <Icon name="information-circle-outline" style={{ fontSize: 24, color: tintcolor }} />
+        drawerIcon: () => (
+            <Icon name="information-circle-outline" style={{color:'steelblue' }} />
         )
     };
     render() {
@@ -15,15 +15,17 @@ export default class GioiThieu extends React.Component {
                 <View style={{ height: 24, backgroundColor: '#fff', alignItems: 'center', justifyContent: 'center' }}>
                 </View>
                 <Header style={{ backgroundColor: '#bdc3c7', height: 50 }}>
-                    <Text style={{ fontSize: 25 }}>Giới thiệu</Text>
-                    <Right>
-                        <TouchableOpacity onPress={() => this.props.navigation.navigate('Trang chủ')}>
+                    <Left style={{ left: -5 }}>
+                        <Button transparent onPress={() => this.props.navigation.navigate('Trang chủ')}>
                             <Icon
-                                style={{ width: 30 }}
                                 name='arrow-back' />
-                        </TouchableOpacity>
+                        </Button>
+                    </Left>
+                    <Right>
+                        <Text  style={{ fontSize: 20, textAlign: 'center', top: 3, color: 'seagreen' }}>Giới thiệu</Text>
                     </Right>
                 </Header>
+                <Image style={{ width: 355, height: 55 }} source={require('./img/logokhoa.png')} />
                 <ScrollView>
                     <View style={{ flex: 1 }}>
                         <View>
@@ -38,7 +40,7 @@ export default class GioiThieu extends React.Component {
                                 </View>
                                 <Text style={{ color: 'midnightblue' }}>2. Đội ngũ cán bộ, giảng viên, sinh viên</Text>
                                 <View>
-                                <Image style={{height: 200 }} source={{ uri: 'http://hdu.edu.vn/SlideShow/2017428231434TK1.jpg' }} />
+                                    <Image style={{ height: 200 }} source={{ uri: 'http://hdu.edu.vn/SlideShow/2017428231434TK1.jpg' }} />
                                     <Text style={{ fontSize: 11 }}>+ Tổng số cán bộ giảng viên: 25</Text>
                                     <Text style={{ fontSize: 11 }}>+ Tiến sĩ: 04</Text>
                                     <Text style={{ fontSize: 11 }}>+ Thạc sĩ: 11</Text>
@@ -84,7 +86,7 @@ export default class GioiThieu extends React.Component {
                                     </View>
                                     <Text style={{ color: 'midnightblue' }}>2. Cơ cấu tổ chức: hiện tại bộ môn có 6 cán bộ</Text>
                                     <View>
-                                    <Image style={{height: 200 }} source={{ uri: 'http://hdu.edu.vn/NewsImages/20174292130299.jpg' }} />
+                                        <Image style={{ height: 200 }} source={{ uri: 'http://hdu.edu.vn/NewsImages/20174292130299.jpg' }} />
                                         <Text style={{ fontSize: 11 }}>1. ThS. Lê Thị Hồng, Phó trưởng bộ môn, phụ trách bộ môn </Text>
                                         <Text style={{ fontSize: 11 }}>2. TS. Phạm Thế Anh, Phó trưởng bộ môn - Trưởng khoa.  </Text>
                                         <Text style={{ fontSize: 11 }}>3. KS. Dương Thị Dung, Giảng viên</Text>
@@ -116,7 +118,7 @@ export default class GioiThieu extends React.Component {
                                     </View>
                                     <Text style={{ color: 'midnightblue' }}>2. Nhân sự</Text>
                                     <View>
-                                    <Image style={{height: 200 }} source={{ uri: 'http://hdu.edu.vn/SlideShow/2017428231746KHMT.jpg' }} />
+                                        <Image style={{ height: 200 }} source={{ uri: 'http://hdu.edu.vn/SlideShow/2017428231746KHMT.jpg' }} />
                                         <Text style={{ fontSize: 11 }}>   Đội ngũ cán bộ của bộ môn đều có trình độ đại học trở lên bao gồm: 01 Tiến sỹ, 03 Thạc sỹ.</Text>
                                     </View>
                                     <Text style={{ color: 'midnightblue' }}>3. Các hướng nghiên cứu chính mà bộ môn đang nghiên cứu gồm:</Text>
@@ -137,7 +139,7 @@ export default class GioiThieu extends React.Component {
                                     <View>
                                         <Text style={{ fontSize: 11 }}>   Giảng dạy và quản lý các học phần Kiến trúc máy tính; Hệ điều hành; Mạng máy tính; Vi xử lý và Lập trình hợp ngữ; Bảo trì hệ thống; Lập trình Java; Hệ điều hành Unix/Linux; Phần mềm nguồn mở; Các vi xử lý hiện đại; Lập trình mạng trên Java; Quản trị hệ thống máy tính; Mạng máy tính; Quản trị mạng. Các học phần giảng dạy cho chuyên ngành đào tạo cử nhân và cao đẳng Công nghệ thông tin.</Text>
                                         <Text style={{ fontSize: 11 }}>    Nghiên cứu khoa học: Tổ chức và quản lý các hoạt động nghiên cứu khoa học công nghệ với mục tiêu nghiên cứu để nâng cao chất lượng giảng dạy, triển khai ứng dụng khoa học công nghệ về kỹ thuật máy tính và khoa học công nghệ mạng máy tính và truyền thông vào thực tế phục vụ các nhiệm vụ kinh tế - xã hội.</Text>
-                                        <Image style={{height: 200}} source={{ uri: 'http://hdu.edu.vn/NewsImages/20145168231b.png' }} />
+                                        <Image style={{ height: 200 }} source={{ uri: 'http://hdu.edu.vn/NewsImages/20145168231b.png' }} />
                                     </View>
                                     <Text style={{ color: 'midnightblue' }}>2. Chiến lược phát triển của bộ môn </Text>
                                     <View>
@@ -153,7 +155,7 @@ export default class GioiThieu extends React.Component {
                                     <Text style={{ color: 'midnightblue' }}>1. Giới thiệu về bộ môn</Text>
                                     <View>
                                         <Text style={{ fontSize: 11 }}>    Bộ môn Các hệ thống thông tin đảm nhiệm chức năng giảng dạy các học phần thuộc hai chuyên ngành hệ thống thông tin và công nghệ phần mềm của Khoa CNTT-TT, và học phần Hệ thống thông tin quản lý của chuyên ngành Quản trị kinh doanh, Tài chính ngân hàng. Bên cạnh nhiệm vụ giảng dạy, nhiệm vụ nghiên cứu khoa học và phát triển các ứng dụng về hệ thống thông tin cũng luôn được bộ môn chú trọng.</Text>
-                                        <Image style={{height: 200 }} source={{ uri: 'http://hdu.edu.vn/SlideShow/2017428231711httt.jpg' }} />
+                                        <Image style={{ height: 200 }} source={{ uri: 'http://hdu.edu.vn/SlideShow/2017428231711httt.jpg' }} />
                                     </View>
                                     <Text style={{ color: 'midnightblue' }}>2. Các hướng nghiên cứu bộ môn đã và sẽ triển khai </Text>
                                     <View>
@@ -161,11 +163,12 @@ export default class GioiThieu extends React.Component {
                                         <Text style={{ fontSize: 11 }}>+ Các công nghệ để thiết kế và xây dựng Website</Text>
                                         <Text style={{ fontSize: 11 }}>+ Phát triển các hệ thống thông tin phục vụ công cuộc tin học hoá</Text>
                                     </View>
+                                    <View style={{ height: 200 }}>
+
+                                    </View>
                                 </View>
                             </View>
-                            <View style={{height:100}}>
 
-                            </View>
                         </View>
                     </View>
                 </ScrollView>
