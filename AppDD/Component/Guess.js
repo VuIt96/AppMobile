@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Image, TextInput, Text, Button, Picker, ImageBackground, ScrollView, Alert } from 'react-native';
+import { StyleSheet, View, ListView, Image, TouchableOpacity, Text, Button, Picker, ImageBackground, ScrollView, Alert, FlatList, TextInput } from 'react-native';
 import { Header, Left, Right, Icon } from 'native-base';
 import { getAllStudents } from './Services';
+import { cntt } from './Data'
 // import {datafake} from './data'
 var DecisionTree = require('decision-tree');
 
@@ -17,34 +18,45 @@ export default class DuDoan extends React.Component {
       result: "",
       training_data: [],
       class_name: "result",
-      features: ["sex", "nation", "address", "area", "block", "test_score", "faculty", "education_program"],
-      // data mẫu để test. e chỉ cần bắt sự kiện thay đổi giá trị của picker và gán lại state tương ứng là đc.
+      features: ["sex", "nation", "address", "area", "block", "test_score", "key_testscore", "faculty", "education_program"],
       sex: "Nam",
-      nation: "Khác",
-      address: "Vĩnh Lộc",
-      area: "KV2",
-      block: "A1",
+      nation: "Kinh",
+      address: "Thọ Xuân",
+      area: "2NT",
+      block: "A",
       test_score: '',
-      faculty: " ",
-      education_program: " ",
-      // sex: "",
-      // nation: "",
-      // address: "",
-      // area: "",
-      // block: "",
-      // test_score: '',
-      // faculty: "",
-      // education_program: ""
+      key_testscore: '',//
+      faculty: "CNTT-TT",
+      education_program: "Khối kiến thức giáo dục đại cương(42),Khối kiến thức giáo dục chuyên nghiệp(88)",
       lotrinh: " ",
-      tennganh: " "
+      tennganh: " ",
+      HK1: " ",
+      HK2: " ",
+      HK3: " ",
+      HK4: " ",
+      Diem2: '',
+      Diem3: '',
     }
   }
   async componentWillMount() {
     let students = await getAllStudents()
     this.setState({ training_data: students })
   }
+  submitAndClear = () => {
+    // this.props.writeText(this.state.key_testscore)
+    this.setState({ key_testscore: '' })
+    this.setState({ Diem2: '' })
+    this.setState({ Diem3: '' })
+    this.setState({ result: '' })
+    this.setState({ tennganh: '' })
+    this.setState({ lotrinh: '' })
+    this.setState({ HK1: '' })
+    this.setState({ HK2: '' })
+    this.setState({ HK3: '' })
+    this.setState({ HK4: '' })
+  }
   onDudoan = () => {
-    let { training_data, class_name, features } = this.state
+    let { training_data, class_name, features, Diem2, Diem3 } = this.state
     var dt = new DecisionTree(training_data, class_name, features);
     var predicted_class = dt.predict({
       sex: this.state.sex,
@@ -53,41 +65,53 @@ export default class DuDoan extends React.Component {
       area: this.state.area,
       block: this.state.block,
       test_score: this.state.test_score,
+      key_testscore: this.state.key_testscore,
       faculty: this.state.faculty,
       education_program: this.state.education_program
     });
-    // console.log(this.state.sex, this.state.nation,this.state.address, this.state.area, predicted_class)
-
-    if (this.state.test_score === "") {
+    var d1 = this.state.key_testscore;
+    var d2 = Diem2;
+    var d3 = Diem3;
+    var tongdiem = (Number(d1) + Number(d2) + Number(d3));
+    if (this.state.key_testscore === "" || this.state.Diem2 === "" || this.state.Diem3 === "") {
       Alert.alert("Thông báo!", "Vui lòng nhập đầy đủ thông tin")
     } else {
-      if ((this.state.test_score < 15) | (this.state.test_score > 33)) {
+      if ((this.state.key_testscore < 1) || (this.state.key_testscore > 10) || this.state.Diem2 < 1 || this.state.Diem2 > 10 || this.state.Diem3 < 1 || this.state.Diem3 > 10|| tongdiem <15){
         Alert.alert("Thông báo!", "Vui lòng nhập lại điểm")
-        // } else {
-        //   if(this.state.faculty==="CNTT-TT"){
-        //     var lt = "Khối kiến thức giáo dục đại cương(40),Khối kiến thức giáo dục chuyên nghiệp(86)"
-        //     var llt = this.setState({education_program:lt})
-        //     var tk = "CNTT-TT"
-        // } else {
-        //   this.setState({ result: predicted_class })
-        // }
       } else {
         if (this.state.faculty === "CNTT-TT") {
-          var lt = "Khối kiến thức giáo dục đại cương(42),Khối kiến thức giáo dục chuyên nghiệp(88)"
+          var lt = "Khối kiến thức giáo dục đại cương(42),Khối kiến thức giáo dục chuyên nghiệp(84)"
+          var lt1 = " HK1: Giải tích(4TC), Đại số tuyến tính(2TC), TA1(4TC), LT_C cơ bản(3TC), Tin cơ sở(3TC), GDTC1(2TC), Mác 1(2TC) - HK2: TA2(3TC), Vật lí 1(3TC), LT_C nâng cao(2TC), Toán rời rạc (2TC), CSDL(2TC), GDTC(2TC), Mác2(2TC) "
+          var lt2 = " HK1: Xác suất(3TC), TA3(3TC), Kiến trúc MT(3TC), LT đồ thị(2TC), CTDL và GT(3TC), PL đại cương(2TC), Tư tưởng HCM(2TC) - HK2: HĐH(32C), LT mật mã(2TC), PPNCKH(2TC), TK CSDL(2TC), TK WEB(2TC), LT HĐT(3), Đường lối(3TC)"
+          var lt3 = "HK1: Mạng MT(3TC), CT dịch(3TC), XL ảnh(3TC), Trí tuệ nhân tạo(3TC), HQT CSDL(3TC), PTTK HĐT(3TC) - HK2: CN Java(3TC), LT mạng(3TC), TKQT Mạng(3TC), CNPM(3TC), TKPM(2TC), LT WEB(2TC)"
+          var lt4 = "HK1: Mạng MT(3TC), CT dịch(3TC), XL ảnh(3TC), Trí tuệ nhân tạo(3TC), HQT CSDL(3TC), PTTK HĐT(3TC) - HK2: CN Java(3TC), LT mạng(3TC), TKQT Mạng(3TC), CNPM(3TC), TKPM(2TC), LT WEB(2TC)"
           var tn = "CNTT-TT"
-          this.setState({ lotrinh: lt })
-          this.setState({ education_program: lt })
-          this.setState({ tennganh: tn })
-          this.setState({ result: predicted_class })
+          if (this.state.block === "C" || this.state.block === "M") {
+            Alert.alert("Thông báo!", "Khối bạn chọn không phù hợp với ngành xét tuyển")
+          } else {
+            this.setState({ lotrinh: lt })
+            this.setState({ education_program: lt })
+            this.setState({ HK1: lt1 })
+            this.setState({ HK2: lt2 })
+            this.setState({ HK3: lt3 })
+            this.setState({ HK4: lt4 })
+            this.setState({ tennganh: tn })
+            this.setState({ test_score: tongdiem })
+            this.setState({ result: predicted_class })
+          }
         } else {
           if (this.state.faculty === "Xã hội") {
-            var lt = "Khối kiến thức giáo dục đại cương(42),Khối kiến thức giáo dục chuyên nghiệp(84)"
+            var lt = "Khối kiến thức giáo dục đại cương(42),Khối kiến thức giáo dục chuyên nghiệp(88)"
             var tn = "Xã hội"
-            this.setState({ education_program: lt })
-            this.setState({ lotrinh: lt })
-            this.setState({ tennganh: tn })
-            this.setState({ result: predicted_class })
-          }else{
+            if (this.state.block === "A" || this.state.block === "B" || this.state.block === "A1" || this.state.block === "M") {
+              Alert.alert("Thông báo!", "Khối bạn chọn không phù hợp với ngành xét tuyển")
+            } else {
+              this.setState({ lotrinh: lt })
+              this.setState({ education_program: lt })
+              this.setState({ tennganh: tn })
+              this.setState({ result: predicted_class })
+            }
+          } else {
             if (this.state.faculty === "Tiểu học") {
               var lt = "Khối kiến thức giáo dục đại cương(40),Khối kiến thức giáo dục chuyên nghiệp(86)"
               var tn = "Tiểu học"
@@ -95,78 +119,114 @@ export default class DuDoan extends React.Component {
               this.setState({ lotrinh: lt })
               this.setState({ tennganh: tn })
               this.setState({ result: predicted_class })
-            }else{
+            } else {
               if (this.state.faculty === "Mầm non") {
                 var lt = "Khối kiến thức giáo dục đại cương(34),Khối kiến thức giáo dục chuyên nghiệp(80)"
                 var tn = "Mầm non"
-                this.setState({ education_program: lt })
-                this.setState({ lotrinh: lt })
-                this.setState({ tennganh: tn })
-                this.setState({ result: predicted_class })
-              }else{
+                if (this.state.block === "M") {
+                  this.setState({ lotrinh: lt })
+                  this.setState({ education_program: lt })
+                  this.setState({ tennganh: tn })
+                  this.setState({ result: predicted_class })
+                } else {
+                  Alert.alert("Thông báo!", "Khối bạn chọn không phù hợp với ngành xét tuyển")
+                }
+              } else {
                 if (this.state.faculty === "GDTC") {
                   var lt = "Khối kiến thức giáo dục đại cương(40),Khối kiến thức giáo dục chuyên nghiệp(73)"
                   var tn = "GDTC"
-                  this.setState({ education_program: lt })
-                  this.setState({ lotrinh: lt })
-                  this.setState({ tennganh: tn })
-                  this.setState({ result: predicted_class })
-                }else{
+                  if (this.state.block === "M") {
+                    this.setState({ lotrinh: lt })
+                    this.setState({ education_program: lt })
+                    this.setState({ tennganh: tn })
+                    this.setState({ result: predicted_class })
+                  } else {
+                    Alert.alert("Thông báo!", "Khối bạn chọn không phù hợp với ngành xét tuyển")
+                  }
+                } else {
                   if (this.state.faculty === "KTCN") {
                     var lt = "Khối kiến thức giáo dục đại cương(36),Khối kiến thức giáo dục chuyên nghiệp(90)"
                     var tn = "KTCN"
-                    this.setState({ education_program: lt })
-                    this.setState({ lotrinh: lt })
-                    this.setState({ tennganh: tn })
-                    this.setState({ result: predicted_class })
-                  }else{
+                    if (this.state.block === "C" || this.state.block === "M") {
+                      Alert.alert("Thông báo!", "Khối bạn chọn không phù hợp với ngành xét tuyển")
+                    } else {
+                      this.setState({ lotrinh: lt })
+                      this.setState({ education_program: lt })
+                      this.setState({ tennganh: tn })
+                      this.setState({ result: predicted_class })
+                    }
+                  } else {
                     if (this.state.faculty === "Luật") {
                       var lt = "Khối kiến thức giáo dục đại cương(45),Khối kiến thức giáo dục chuyên nghiệp(68)"
                       var tn = "Luật"
-                      this.setState({ education_program: lt })
-                      this.setState({ lotrinh: lt })
-                      this.setState({ tennganh: tn })
-                      this.setState({ result: predicted_class })
-                    }else{
+                      if (this.state.block === "A" || this.state.block === "A1") {
+                        Alert.alert("Thông báo!", "Khối bạn chọn không phù hợp với ngành xét tuyển")
+                      } else {
+                        this.setState({ lotrinh: lt })
+                        this.setState({ education_program: lt })
+                        this.setState({ tennganh: tn })
+                        this.setState({ result: predicted_class })
+                      }
+                    } else {
                       if (this.state.faculty === "Ngoại ngữ") {
                         var lt = "Khối kiến thức giáo dục đại cương(26),Khối kiến thức giáo dục chuyên nghiệp(90)"
                         var tn = "Ngoại ngữ"
-                        this.setState({ education_program: lt })
-                        this.setState({ lotrinh: lt })
-                        this.setState({ tennganh: tn })
-                        this.setState({ result: predicted_class })
-                      }else{
+                        if (this.state.block === "A" || this.state.block === "M" || this.state.block === "B") {
+                          Alert.alert("Thông báo!", "Khối bạn chọn không phù hợp với ngành xét tuyển")
+                        } else {
+                          this.setState({ lotrinh: lt })
+                          this.setState({ education_program: lt })
+                          this.setState({ tennganh: tn })
+                          this.setState({ result: predicted_class })
+                        }
+                      } else {
                         if (this.state.faculty === "KT-QTKD") {
                           var lt = "Khối kiến thức giáo dục đại cương(26),Khối kiến thức giáo dục chuyên nghiệp(90)"
                           var tn = "KT-QTKD"
-                          this.setState({ education_program: lt })
-                          this.setState({ lotrinh: lt })
-                          this.setState({ tennganh: tn })
-                          this.setState({ result: predicted_class })
-                        }else{
+                          if (this.state.block === "C" || this.state.block === "M") {
+                            Alert.alert("Thông báo!", "Khối bạn chọn không phù hợp với ngành xét tuyển")
+                          } else {
+                            this.setState({ lotrinh: lt })
+                            this.setState({ education_program: lt })
+                            this.setState({ tennganh: tn })
+                            this.setState({ result: predicted_class })
+                          }
+                        } else {
                           if (this.state.faculty === "N-L-N Nghiệp") {
                             var lt = "Khối kiến thức giáo dục đại cương(44),Khối kiến thức giáo dục chuyên nghiệp(82)"
                             var tn = "N-L-N Nghiệp"
-                            this.setState({ education_program: lt })
-                            this.setState({ lotrinh: lt })
-                            this.setState({ tennganh: tn })
-                            this.setState({ result: predicted_class })
-                          }else{
+                            if (this.state.block === "C" || this.state.block === "M") {
+                              Alert.alert("Thông báo!", "Khối bạn chọn không phù hợp với ngành xét tuyển")
+                            } else {
+                              this.setState({ lotrinh: lt })
+                              this.setState({ education_program: lt })
+                              this.setState({ tennganh: tn })
+                              this.setState({ result: predicted_class })
+                            }
+                          } else {
                             if (this.state.faculty === "TL-GD") {
                               var lt = "Khối kiến thức giáo dục đại cương(46),Khối kiến thức giáo dục chuyên nghiệp(67)"
                               var tn = "TL-GD"
-                              this.setState({ education_program: lt })
-                              this.setState({ lotrinh: lt })
-                              this.setState({ tennganh: tn })
-                              this.setState({ result: predicted_class })
-                            }else{
+                              if (this.state.block === "A" || this.state.block === "B" || this.state.block === "A1" || this.state.block === "M") {
+                                Alert.alert("Thông báo!", "Khối bạn chọn không phù hợp với ngành xét tuyển")
+                              } else {
+                                this.setState({ lotrinh: lt })
+                                this.setState({ education_program: lt })
+                                this.setState({ tennganh: tn })
+                                this.setState({ result: predicted_class })
+                              }
+                            } else {
                               if (this.state.faculty === "Tự nhiên") {
                                 var lt = "Khối kiến thức giáo dục đại cương(37),Khối kiến thức giáo dục chuyên nghiệp(89)"
                                 var tn = "Tự nhiên"
-                                this.setState({ education_program: lt })
-                                this.setState({ lotrinh: lt })
-                                this.setState({ tennganh: tn })
-                                this.setState({ result: predicted_class })
+                                if (this.state.block === "C" || this.state.block === "M") {
+                                  Alert.alert("Thông báo!", "Khối bạn chọn không phù hợp với ngành xét tuyển")
+                                } else {
+                                  this.setState({ lotrinh: lt })
+                                  this.setState({ education_program: lt })
+                                  this.setState({ tennganh: tn })
+                                  this.setState({ result: predicted_class })
+                                }
                               }
                             }
                           }
@@ -181,7 +241,6 @@ export default class DuDoan extends React.Component {
         }
       }
     }
-
   }
   render() {
     return (
@@ -189,15 +248,13 @@ export default class DuDoan extends React.Component {
         <View style={{ height: 24, backgroundColor: '#fff', alignItems: 'center', justifyContent: 'center' }}>
         </View>
         <Header style={{ backgroundColor: '#bdc3c7', height: 50 }}>
-          <Left style={{ left: -5 }}>
+          <Left style={{ left: -75 }}>
             <Icon name="menu" onPress={() => this.props.navigation.openDrawer()} />
           </Left>
-          <Right>
-            <Text style={{ fontSize: 20, textAlign: 'center', top: 2, color: 'lightseagreen' }}>Dự đoán</Text>
-          </Right>
+          <Text style={{ fontSize: 20, left: -40, top: 10, color: 'seagreen' }}>Dự đoán</Text>
         </Header>
         <View>
-          <ImageBackground style={{ width: 355, height: 150 }} source={require('./img/logo.jpg')}>
+          <ImageBackground style={{ width: 360, height: 150 }} source={require('./img/logo.jpg')}>
             <Text style={{ color: 'blue', textAlign: 'center', fontSize: 18 }}>HỆ THỐNG DỰ ĐOÁN KẾT QUẢ HỌC TẬP</Text>
             <Text style={{ color: 'blue', textAlign: 'center', fontSize: 18 }}>CỦA SINH VIÊN</Text>
           </ImageBackground>
@@ -287,7 +344,7 @@ export default class DuDoan extends React.Component {
               </View>
             </View>
             <View style={{ flexDirection: 'row' }}>
-              <Text style={{ width: 100, left: 20, top: 10, color: 'navy' }}>Khu Vực</Text>
+              <Text style={{ width: 100, left: 20, top: 10, color: 'navy' }}>Khối thi</Text>
               <View style={styles.pickers}>
                 <Picker
                   style={{ width: 180 }}
@@ -301,17 +358,43 @@ export default class DuDoan extends React.Component {
                   <Picker.Item label="M" value="M" />
                 </Picker>
               </View>
-            </View>
+            </View>        
             <View style={{ flexDirection: 'row' }}>
-              <Text style={{ width: 100, left: 20, top: 10, color: 'navy' }}>Điểm Thi</Text>
+              <Text style={{ width: 100, left: 20, top: 10, color: 'navy' }}>Điểm Môn 1</Text>
               <View>
                 <TextInput
                   style={styles.textinputs}
                   keyboardType='numeric'
-                  placeholder='15<Điểm<33'
+                  placeholder='1=< Điểm =<10'
                   maxLength={4}
-                  value={this.state.test_score}
-                  onChangeText={(value) => this.setState({ test_score: value })}
+                  value={this.state.key_testscore}
+                  onChangeText={(value) => this.setState({ key_testscore: value })}
+                />
+              </View>
+            </View>
+            <View style={{ flexDirection: 'row' }}>
+              <Text style={{ width: 100, left: 20, top: 10, color: 'navy' }}>Điểm Môn 2</Text>
+              <View>
+                <TextInput
+                  style={styles.textinputs}
+                  keyboardType='numeric'
+                  placeholder='1=< Điểm =<10'
+                  maxLength={4}
+                  value={this.state.Diem2}
+                  onChangeText={(value) => this.setState({ Diem2: value })}
+                />
+              </View>
+            </View>
+            <View style={{ flexDirection: 'row' }}>
+              <Text style={{ width: 100, left: 20, top: 10, color: 'navy' }}>Điểm Môn 3</Text>
+              <View>
+                <TextInput
+                  style={styles.textinputs}
+                  keyboardType='numeric'
+                  placeholder='1=< Điểm =<10'
+                  maxLength={4}
+                  value={this.state.Diem3}
+                  onChangeText={(value) => this.setState({ Diem3: value })}
                 />
               </View>
             </View>
@@ -346,8 +429,8 @@ export default class DuDoan extends React.Component {
               </View>
               <View style={{ left: 70, width: 100 }}>
                 <Button
-                  title='Thoát'
-                  onPress={() => this.props.navigation.navigate('Trang chủ')}
+                  title='Reset'
+                  onPress={this.submitAndClear}
                 />
               </View>
             </View>
@@ -368,6 +451,26 @@ export default class DuDoan extends React.Component {
               <View style={{ flexDirection: 'row' }}>
                 <Text style={{ color: 'midnightblue', top: 10 }}> Lộ trình:       </Text>
                 <Text style={styles.input}>{this.state.lotrinh}</Text>
+              </View>
+              <View>
+                <Text style={{ color: 'midnightblue', top: 10, textAlign: 'center' }}>LT chi tiết     </Text>
+                {/* <Text style={styles.input}>{this.state.chitiet}</Text> */}
+                <View style={{ flexDirection: 'column' }}>
+                  <Text style={{ color: 'midnightblue', top: 10 }}> Năm 1:  </Text>
+                  <Text style={styles.output}>{this.state.HK1}</Text>
+                </View>
+                <View style={{ flexDirection: 'column' }}>
+                  <Text style={{ color: 'midnightblue', top: 10 }}> Năm 2:  </Text>
+                  <Text style={styles.output}>{this.state.HK2}</Text>
+                </View>
+                <View style={{ flexDirection: 'column' }}>
+                  <Text style={{ color: 'midnightblue', top: 10 }}> Năm 3:  </Text>
+                  <Text style={styles.output}>{this.state.HK3}</Text>
+                </View>
+                <View style={{ flexDirection: 'column' }}>
+                  <Text style={{ color: 'midnightblue', top: 10 }}> Năm 4:  </Text>
+                  <Text style={styles.output}>{this.state.HK4}</Text>
+                </View>
               </View>
             </View>
             <View style={{ width: 200 }}>
@@ -422,6 +525,14 @@ const styles = StyleSheet.create({
     padding: 8,
     alignItems: 'center',
     textAlign: 'center'
+  },
+  output: {
+    margin: 3,
+    borderColor: 'black',
+    width: 250,
+    borderWidth: 1,
+    padding: 8,
+    top: 5
   },
   viewpicker: {
     margin: 5,

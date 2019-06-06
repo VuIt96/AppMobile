@@ -15,17 +15,15 @@ export default class GioiThieu extends React.Component {
                 <View style={{ height: 24, backgroundColor: '#fff', alignItems: 'center', justifyContent: 'center' }}>
                 </View>
                 <Header style={{ backgroundColor: '#bdc3c7', height: 50 }}>
-                    <Left style={{ left: -5 }}>
+                    <Left style={{ left: -80}}>
                         <Button transparent onPress={() => this.props.navigation.navigate('Trang chủ')}>
                             <Icon
                                 name='arrow-back' />
                         </Button>
                     </Left>
-                    <Right>
-                        <Text  style={{ fontSize: 20, textAlign: 'center', top: 3, color: 'seagreen' }}>Giới thiệu</Text>
-                    </Right>
+                    <Text style={{ fontSize: 20, left: -40, top: 10, color: 'seagreen' }}>Dự đoán</Text>
                 </Header>
-                <Image style={{ width: 355, height: 55 }} source={require('./img/logokhoa.png')} />
+                <Image style={{ width: 360, height: 55 }} source={require('./img/logokhoa.png')} />
                 <ScrollView>
                     <View style={{ flex: 1 }}>
                         <View>

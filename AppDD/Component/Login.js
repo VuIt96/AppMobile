@@ -1,14 +1,15 @@
 import React, { component } from 'react';
-import { StyleSheet, Text, View, TextInput, Button, Alert, Image } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button, Alert, ActivityIndicator, AppRegistry } from 'react-native';
 import { Header, Left, Right, Icon } from 'native-base';
-class Login extends React.Component {
+export default class Login extends React.Component {
   //   static navigationOptions = {
   //     title: "Login",
   //     header: null,
   //   };
   static navigationOptions = {
     drawerIcon: () => (
-      <Icon name="log-out" style={{color:'red'}} />
+      <Icon name="log-out" style={{ color: 'red' }} />
+
     )
   };
   state = {
@@ -53,6 +54,7 @@ class Login extends React.Component {
           //   keyboardType = 'email-address'
           onChangeText={(user1) => this.setState({ user1 })}
           placeholder='username'
+          autoFocus={true}
         />
         {/* <View style={{ flexDirection: 'row', backgroundColor: 'rgba(215,125,115,0.2)' }}>
           <Icon name="key" /> */}
@@ -63,11 +65,11 @@ class Login extends React.Component {
           placeholder={'password'}
           secureTextEntry={true}
         />
-        <Button style={styles.buttonText}
-          title="LOGIN"
-          onPress={this.onLogin.bind(this)}
-        >
-        </Button>
+          <Button style={styles.buttonText}
+            title="LOGIN"
+            onPress={this.onLogin.bind(this)}
+          >
+          </Button>
       </View>
     );
   }
@@ -77,7 +79,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    },
+  },
   input: {
     height: 40,
     width: 220,
@@ -105,6 +107,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: 'midnightblue',
     top: -30
-  },
+  }
 });
-export default (Login)
+AppRegistry.registerComponent('Login', () => Login)

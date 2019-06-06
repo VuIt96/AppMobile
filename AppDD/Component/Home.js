@@ -57,7 +57,7 @@ export default class Home extends React.Component {
     componentWillUnmount() {
         clearInterval(this.state.interval);
     }
-
+    
     render() {
         return (
             <View>
@@ -65,14 +65,12 @@ export default class Home extends React.Component {
                     <View style={{ height: 24, backgroundColor: '#fff', alignItems: 'center', justifyContent: 'center' }}>
                     </View>
                     <Header style={{ backgroundColor: '#bdc3c7', height: 50 }}>
-                        <Left style={{ left: -5 }}>
+                        <Left style={{ left: -75 }}>
                             <Icon name="menu" onPress={() => this.props.navigation.openDrawer()} />
                         </Left>
-                        <Right>
-                            <Text style={{ fontSize: 20, textAlign: 'center', top: 3, color: 'seagreen' }}>Trang chủ</Text>
-                        </Right>
+                            <Text style={{ fontSize: 20,left:-40 ,top: 10, color: 'seagreen' }}>Trang chủ</Text>
                     </Header>
-                    <Image style={{ width: 355, height: 55 }} source={require('./img/logokhoa.png')} />
+                    <Image style={{ width: 360, height: 55 }} source={require('./img/logokhoa.png')} />
                 </View>
                 <ScrollView>
                     <Slideshow

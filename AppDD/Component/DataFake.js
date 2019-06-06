@@ -28,7 +28,7 @@ const Tintuc_sukien = [
 const Tintuc_sukien1 = [
     {
         id: '1',
-        tieude:'Để thực hiện tốt nhiệm vụ tuyển sinh năm 2018, nhằm thu hút học sinh các trường phổ thông đăng kí vào học tại Khoa CNTT&TT',
+        tieude: 'Để thực hiện tốt nhiệm vụ tuyển sinh năm 2018, nhằm thu hút học sinh các trường phổ thông đăng kí vào học tại Khoa CNTT&TT',
         title: 'Khoa CNTT&TT tổ chức công tác tuyên truyền và tư vấn tuyển sinh',
         nd: 'Để thực hiện tốt nhiệm vụ tuyển sinh năm 2018, nhằm thu hút học sinh các trường phổ thông đăng kí vào học tại Khoa CNTT&TT, trường Đại học Hồng Đức. Khoa CNTT&TT tổ chức đi tuyên truyền và tư vấn tuyển sinh tại 05 trường PTTH:',
         Tieude: 'BÁO CÁO CÔNG TÁC TUYÊN TRUYỀN VÀ TƯ VẤN TUYỂN SINH',
@@ -50,7 +50,7 @@ const Tintuc_sukien1 = [
 const NCKH_Thongbao1 = [
     {
         id: '1',
-        tieude:'Một số vấn đề chọn lọc của CNTT và truyền thông lần thứ XXI - năm 2018 với chủ đề: Internet of things',
+        tieude: 'Một số vấn đề chọn lọc của CNTT và truyền thông lần thứ XXI - năm 2018 với chủ đề: Internet of things',
         title: 'Hội thảo quốc gia “Một số vấn đề chọn lọc của CNTT và truyền thông” lần thứ XXI - năm 2018',
         nd: 'Ngày 27/07/2018, tại Trường Đại học Hồng Đức (ĐHHĐ), Viện Công nghệ Thông tin (CNTT) thuộc Viện Hàn lâm Khoa học và Công nghệ Việt Nam phối hợp với Trường ĐHHĐ tổ chức Hội thảo quốc gia “Một số vấn đề chọn lọc của CNTT và truyền thông” lần thứ XXI - năm 2018 với chủ đề: Internet of things',
         // Tieude: 'Một số vấn đề chọn lọc của CNTT và truyền thông',
@@ -103,7 +103,7 @@ const NCKH_kq1 = [
     {
         id: '1',
         title: 'Hội thảo khoa học: “Internet of Things và các ứng dụng trong điều khiển”',
-        tieude:'Ngày 18/03/2017, Trường Đại học Hồng Đức đã tổ chức Hội thảo khoa học: “Internet of Things và các ứng dụng trong điều khiển”',
+        tieude: 'Ngày 18/03/2017, Trường Đại học Hồng Đức đã tổ chức Hội thảo khoa học: “Internet of Things và các ứng dụng trong điều khiển”',
         nd: 'Nhằm mục tiêu nghiên cứu và trao đổi học thuật về mạng vạn vật, các ứng dụng của mạng vạn vật. Ngày 18/03/2017, Trường Đại học Hồng Đức đã tổ chức Hội thảo khoa học: “Internet of Things và các ứng dụng trong điều khiển”.',
         // Tieude: 'Một số vấn đề chọn lọc của CNTT và truyền thông',
         ndc1: 'Tham dự Hội thảo có  PGS.TS. Hoàng Thị Mai, Phó Hiệu trưởng Nhà trường; TS. Nguyễn Văn Thế, Phó trưởng phòng Quản lý Khoa học và công nghệ; đại diện lãnh đạo Phòng Công nghệ thông tin của UBND tỉnh Thanh Hóa; Công ty phần mềm Minh Lộ, Trung tâm CNTT (tập đoàn VNPT Thanh Hóa); lãnh đạo các phòng ban chức năng, các cán bộ giảng viên có bài tham luận, cùng đông đảo cán bộ, giảng viên và học viên cao học khoa CNTT&TT.',
@@ -153,24 +153,24 @@ const NCKH_kq = [
 ]
 const Sv_CVHT1 = [
     {
-        id:'1',
-        title:'Quy định số 234/QĐ-ĐHHĐ đào tạo đại học và cao đẳng hệ chính quy theo hệ thống tín chỉ'
+        id: '1',
+        title: 'Quy định số 234/QĐ-ĐHHĐ đào tạo đại học và cao đẳng hệ chính quy theo hệ thống tín chỉ'
     }
 ]
-const Sv_CVHT = [ 
+const Sv_CVHT = [
     {
-        id:'1',
-        title:'Thông báo thực hiện bảo lưu kết quả học tập và chuẩn đầu ra Tiếng Anh theo định hướng TOEIC đối với SV liên thông hệ chính quy'
+        id: '1',
+        title: 'Thông báo thực hiện bảo lưu kết quả học tập và chuẩn đầu ra Tiếng Anh theo định hướng TOEIC đối với SV liên thông hệ chính quy'
     },
     {
-        id:'2',
-        title:'Thông báo 166 về việc áp dụng chương trình đào tạo ĐH,CĐ hệ chính quy tuyển sinh năm 2015'
+        id: '2',
+        title: 'Thông báo 166 về việc áp dụng chương trình đào tạo ĐH,CĐ hệ chính quy tuyển sinh năm 2015'
     },
     {
-        id:'3',
-        title:'CV số 11/QyĐ-ĐHHĐ, ngày 25/01/2016 Quy định về việc đánh giá kết quả học Giáo dục quốc phòng và an ninh đối với học sinh, sinh viên'
+        id: '3',
+        title: 'CV số 11/QyĐ-ĐHHĐ, ngày 25/01/2016 Quy định về việc đánh giá kết quả học Giáo dục quốc phòng và an ninh đối với học sinh, sinh viên'
     },
-    
+
 ]
 
 export {
